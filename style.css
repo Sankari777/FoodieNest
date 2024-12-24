@@ -754,6 +754,53 @@ nav a {
   color: white;
   padding-bottom:100px;
 }
+.search-container {
+  margin: 10px auto;
+  max-width: 90%; /* Adjust for smaller screen sizes */
+  position: relative;
+}
+
+.search-bar {
+  width: 100%; /* Full width on mobile */
+  padding: 10px;
+  font-size: 14px; /* Adjust font size */
+}
+
+.suggestions {
+  position: absolute;
+  top: 100%;
+  left: 0;
+  right: 0;
+  background: #fff;
+  border: 1px solid #ccc;
+  border-radius: 5px;
+  max-height: 200px; /* Reduce for mobile */
+  overflow-y: auto;
+  z-index: 1000;
+}
+
+.suggestion-item {
+  display: flex;
+  align-items: center;
+  padding: 10px;
+  cursor: pointer;
+  border-bottom: 1px solid #f1f1f1;
+}
+
+.suggestion-item img {
+  width: 30px; /* Adjust image size for mobile */
+  height: 30px;
+  border-radius: 5px;
+  margin-right: 10px;
+}
+
+.no-results {
+  padding: 10px;
+  font-size: 12px;
+  color: #999;
+  text-align: center;
+}
+
 /* Responsive styles */
 @media (max-width: 768px) {
   .nav-links {
