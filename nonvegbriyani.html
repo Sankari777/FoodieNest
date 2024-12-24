@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ordering food</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Nonveg</h1>
+  </header>
+  <main>
+    <section id="menu">
+      <div class="menu-container">
+        <div class="food-item">
+          <img src="muttonbriyani.jpg" alt="muttonbriyani">
+          <h3>Mutton Briyani</h3>
+          <p><strong>₹450</strong></p>
+          <label for="muttonbriyani-quantity">Qty:</label>
+          <input type="number" id="muttonbriyani-quantity" min="1" value="1">
+          <button onclick="addToCart('muttonbriyani', 450)">Add to Cart</button>
+        </div>
+        <div class="food-item">
+          <img src="chickenbriyani.jpg" alt="chickenbriyani">
+          <h3>Chicken Briyani</h3>
+          <p><strong>₹150</strong></p>
+          <label for="chickenbriyani-quantity">Qty:</label>
+          <input type="number" id="chickenbriyani-quantity" min="1" value="1">
+          <button onclick="addToCart('chickenbriyani', 150)">Add to Cart</button>
+        </div>
+        <div class="food-item">
+          <img src="eggbriyani.jpg" alt="eggbriyani">
+          <h3>Egg Briyani </h3>
+          <p><strong>₹250</strong></p>
+          <label for="eggbriyani-quantity">Qty:</label>
+          <input type="number" id="eggbriyani-quantity" min="1" value="1">
+          <button onclick="addToCart('eggbriyani', 250)">Add to Cart</button>
+        </div>
+        <div class="food-item">
+          <img src="prawnbriyani.jpg" alt="prawnbriyani">
+          <h3>Prawn Briyani</h3>
+          <p><strong>₹350</strong></p>
+          <label for="prawnbriyani-quantity">Qty:</label>
+          <input type="number" id="prawnbriyani-quantity" min="1" value="1">
+          <button onclick="addToCart('prawnbriyani', 350)">Add to Cart</button>
+        </div>
+        <div class="food-item">
+            <img src="beefbriyani.jpg" alt="beefbriyani">
+            <h3>Beef Briyani</h3>
+            <p><strong>₹350</strong></p>
+            <label for="beefbriyani-quantity">Qty:</label>
+            <input type="number" id="beefbriyani-quantity" min="1" value="1">
+            <button onclick="addToCart('beefbriyani', 350)">Add to Cart</button>
+          </div>
+          <div class="food-item">
+            <img src="fishbriyani.jpg" alt="fishbriyani">
+            <h3>Fish Briyani</h3>
+            <p><strong>₹350</strong></p>
+            <label for="fishbriyani-quantity">Qty:</label>
+            <input type="number" id="fishbriyani-quantity" min="1" value="1">
+            <button onclick="addToCart('fishbriyani', 350)">Add to Cart</button>
+          </div>
+      </div>
+    </section>
+    <button id="proceed" onclick="proceedToOrder()">Proceed to Order</button>
+  </main>
+
+  <script>
+    let cart = [];
+
+    function addToCart(name, price) {
+      const quantity = parseInt(document.getElementById(`${name.toLowerCase()}-quantity`).value);
+
+      if (quantity <= 0) {
+        alert('Quantity must be at least 1.');
+        return;
+      }
+
+      // Check if item already exists in the cart
+      const existingItem = cart.find(item => item.name === name);
+      if (existingItem) {
+        existingItem.quantity += quantity;
+        existingItem.totalPrice += quantity * price;
+      } else {
+        cart.push({ name, price, quantity, totalPrice: quantity * price });
+      }
+
+      alert(`${name} added to cart!`);
+    }
+
+    function proceedToOrder() {
+      localStorage.setItem('cart', JSON.stringify(cart));
+      window.location.href = 'order.html';
+    }
+  </script>
+    <script src="foodData.js"></script>
+    <script src="search.js"></script>
+</body>
+</html>

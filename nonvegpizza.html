@@ -1,0 +1,88 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ordering food</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="foodData.js" defer></script>
+<script src="search.js" defer></script>
+
+</head>
+<body>
+  <header>
+    <h1>Nonveg</h1>
+  </header>
+  
+  <main>
+    <section id="menu">
+      <div class="menu-container">
+        <div class="food-item">
+          <img src="BBQ-chicken.webp" alt="bbqchickenpizza">
+          <h3>BBQ chicken Pizza</h3>
+          <p><strong>₹200</strong></p>
+          <label for="bbqchickenpizza-quantity">Qty:</label>
+          <input type="number" id="bbqchickenpizza-quantity" min="1" value="1">
+          <button onclick="addToCart('bbqchickenpizza', 200)">Add to Cart</button>
+        </div>
+        <div class="food-item">
+          <img src="jerkpizza.jpg" alt="jerkchickenpizza">
+          <h3>Jerk chicken pizza</h3>
+          <p><strong>₹150</strong></p>
+          <label for="jerkchickenpizza-quantity">Qty:</label>
+          <input type="number" id="jerkchickenpizza-quantity" min="1" value="1">
+          <button onclick="addToCart('jerkchickenpizza', 150)">Add to Cart</button>
+        </div>
+        <div class="food-item">
+          <img src="TandooriPizza.jpg" alt="tandoorichickenPizza">
+          <h3>Tandoori Chicken Pizza </h3>
+          <p><strong>₹250</strong></p>
+          <label for="tandoorichickenPizza-quantity">Qty:</label>
+          <input type="number" id="tandoorichickenPizza-quantity" min="1" value="1">
+          <button onclick="addToCart('tandoorichickenPizza', 250)">Add to Cart</button>
+        </div>
+        <div class="food-item">
+          <img src="Pepperoni.jpg" alt="pepperonipizza">
+          <h3>Pepperoni pizza</h3>
+          <p><strong>₹350</strong></p>
+          <label for="pepperonipizza-quantity">Qty:</label>
+          <input type="number" id="pepperonipizza-quantity" min="1" value="1">
+          <button onclick="addToCart('pepperonipizza', 350)">Add to Cart</button>
+        </div>
+      </div>
+    </section>
+    <button id="proceed" onclick="proceedToOrder()">Proceed to Order</button>
+  </main>
+
+  <script>
+    let cart = [];
+
+    function addToCart(name, price) {
+      const quantity = parseInt(document.getElementById(`${name.toLowerCase()}-quantity`).value);
+
+      if (quantity <= 0) {
+        alert('Quantity must be at least 1.');
+        return;
+      }
+
+      // Check if item already exists in the cart
+      const existingItem = cart.find(item => item.name === name);
+      if (existingItem) {
+        existingItem.quantity += quantity;
+        existingItem.totalPrice += quantity * price;
+      } else {
+        cart.push({ name, price, quantity, totalPrice: quantity * price });
+      }
+
+      alert(`${name} added to cart!`);
+    }
+
+    function proceedToOrder() {
+      localStorage.setItem('cart', JSON.stringify(cart));
+      window.location.href = 'order.html';
+    }
+  </script>
+  
+  
+</body>
+</html>

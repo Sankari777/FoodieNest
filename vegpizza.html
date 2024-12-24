@@ -1,0 +1,85 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ordering food</title>
+  <link rel="stylesheet" href="style.css">
+  <script src="foodData.js" defer></script>
+  <script src="search.js" defer></script>
+</head>
+<body>
+  <header>
+    <h1>Veg pizza</h1>
+  </header>
+  <main>
+    <section id="menu">
+      <div class="menu-container">
+        <div class="food-item">
+          <img src="Margherita pizza.jpg" alt="margheritapizza">
+          <h3>Margherita Pizza</h3>
+          <p><strong>₹200</strong></p>
+          <label for="margheritapizza-quantity">Qty:</label>
+          <input type="number" id="margheritapizza-quantity" min="1" value="1">
+          <button onclick="addToCart('margheritapizza', 200)">Add to Cart</button>
+        </div>
+        <div class="food-item">
+          <img src="Farmhouse.jpg" alt="farmhousepizza">
+          <h3>Farmhouse Pizza</h3>
+          <p><strong>₹150</strong></p>
+          <label for="farmhousepizza-quantity">Qty:</label>
+          <input type="number" id="farmhousepizza-quantity" min="1" value="1">
+          <button onclick="addToCart('farmhousepizza', 150)">Add to Cart</button>
+        </div>
+        <div class="food-item">
+          <img src="paneer.jpeg" alt="paneerpizza">
+          <h3>Paneer Pizza</h3>
+          <p><strong>₹250</strong></p>
+          <label for="paneerpizza-quantity">Qty:</label>
+          <input type="number" id="paneerpizza-quantity" min="1" value="1">
+          <button onclick="addToCart('paneerpizza', 250)">Add to Cart</button>
+        </div>
+        <div class="food-item">
+          <img src="Mushrooms.jpg" alt="mushroompizza">
+          <h3>Mushroom Pizza</h3>
+          <p><strong>₹350</strong></p>
+          <label for="mushroompizza-quantity">Qty:</label>
+          <input type="number" id="mushroompizza-quantity" min="1" value="1">
+          <button onclick="addToCart('mushroompizza', 350)">Add to Cart</button>
+        </div>
+      </div>
+    </section>
+    <button id="proceed" onclick="proceedToOrder()">Proceed to Order</button>
+  </main>
+
+  <script>
+    let cart = [];
+
+    function addToCart(name, price) {
+      const quantity = parseInt(document.getElementById(`${name.toLowerCase()}-quantity`).value);
+
+      if (quantity <= 0) {
+        alert('Quantity must be at least 1.');
+        return;
+      }
+
+      // Check if item already exists in the cart
+      const existingItem = cart.find(item => item.name === name);
+      if (existingItem) {
+        existingItem.quantity += quantity;
+        existingItem.totalPrice += quantity * price;
+      } else {
+        cart.push({ name, price, quantity, totalPrice: quantity * price });
+      }
+
+      alert(`${name} added to cart!`);
+    }
+
+    function proceedToOrder() {
+      localStorage.setItem('cart', JSON.stringify(cart));
+      window.location.href = 'order.html';
+    }
+
+  </script>
+</body>
+</html>

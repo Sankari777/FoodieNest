@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="style.css" >
+    <script src="foodData.js" defer></script>
+  <script src="search.js" defer></script>
+  <link rel="icon" href="foodimage.png" type="image/x-icon">
+    <title>FoodieNest</title>
+</head>
+<body class="home">
+    <center>
+<nav class="navbar">
+       <div class="logo">
+        <img src="foodimage.png" alt="Logo">
+        <a href="index.html">FoodieNest</a></div>
+        <div class="menu-toggle" id="mobile-menu">
+            <div class="bar"></div>
+            <div class="bar"></div>
+            <div class="bar"></div>
+        </div>
+            <ul>
+              <li><a href="index.html">Home</a></li>
+              <li><a href="menu.html">Menu</a></li>
+              <li><a href="about.html">About</a></li>
+              <li><a href="contact.html">Contact</a></li>
+            </ul>    
+</nav>
+<div class="search-bar">
+    <input type="text" id="searchInput" placeholder="Search for food items..." />
+    <button onclick="searchFood()">Search</button>
+</div>
+<div class="results" id="results"></div>
+<br><br>
+<h1>Welcome to FoodieNest</h1>
+<br>
+<h2>Order your fav Food</h2>
+<img src="foodorder1.webp" class="foodorder" width="200px">
+<script src="script.js"></script>
+    </center> 
+</body>
+</html>

@@ -1,0 +1,109 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ordering food</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Nonveg</h1>
+  </header>
+
+  <main>
+    <section id="menu">
+      <div class="menu-container">
+        <div class="food-item">
+          <img src="chickenfriedrice.jpg" alt="chickenfriedrice">
+          <h3>Chicken Friedrice</h3>
+          <p><strong>₹200</strong></p>
+          <label for="chickenfriedrice-quantity">Qty:</label>
+          <input type="number" id="chickenfriedrice-quantity" min="1" value="1">
+          <button onclick="addToCart('chickenfriedrice', 200)">Add to Cart</button>
+        </div>
+        <div class="food-item">
+          <img src="muttonfriedrice.jpg" alt="muttonfriedrice">
+          <h3>Mutton Friedrice</h3>
+          <p><strong>₹150</strong></p>
+          <label for="muttonfriedrice-quantity">Qty:</label>
+          <input type="number" id="muttonfriedrice-quantity" min="1" value="1">
+          <button onclick="addToCart('muttonfriedrice', 150)">Add to Cart</button>
+        </div>
+        <div class="food-item">
+          <img src="eggfriedrice.jpg" alt="eggfriedrice">
+          <h3>Egg Friedrice</h3>
+          <p><strong>₹250</strong></p>
+          <label for="eggfriedrice-quantity">Qty:</label>
+          <input type="number" id="eggfriedrice-quantity" min="1" value="1">
+          <button onclick="addToCart('eggfriedrice', 250)">Add to Cart</button>
+        </div>
+        <div class="food-item">
+          <img src="chickenschezwanfriedrice.jpg" alt="chickenschezwanfriedrice">
+          <h3>Chicken Schezwan rice</h3>
+          <p><strong>₹350</strong></p>
+          <label for="chickenschezwanfriedrice-quantity">Qty:</label>
+          <input type="number" id="chickenschezwanfriedrice-quantity" min="1" value="1">
+          <button onclick="addToCart('chickenschezwanfriedrice', 350)">Add to Cart</button>
+        </div>
+        <div class="food-item">
+            <img src="eggschezwanfriedrice.jpg" alt="eggschezwanfriedrice">
+            <h3>Egg Schezwan Friedrice</h3>
+            <p><strong>₹250</strong></p>
+            <label for="eggschezwanfriedrice-quantity">Qty:</label>
+            <input type="number" id="eggschezwanfriedrice-quantity" min="1" value="1">
+            <button onclick="addToCart('eggschezwanfriedrice', 250)">Add to Cart</button>
+          </div>
+          <div class="food-item">
+            <img src="prawnfriedrice.jpg" alt="prawnfriedrice">
+            <h3>Prawn Friedrice</h3>
+            <p><strong>₹250</strong></p>
+            <label for="prawnfriedrice-quantity">Qty:</label>
+            <input type="number" id="prawnfriedrice-quantity" min="1" value="1">
+            <button onclick="addToCart('prawnfriedrice', 250)">Add to Cart</button>
+          </div>
+          <div class="food-item">
+            <img src="beeffriedrice.jpg" alt="beeffriedrice">
+            <h3>Beef Friedrice</h3>
+            <p><strong>₹250</strong></p>
+            <label for="beeffriedrice-quantity">Qty:</label>
+            <input type="number" id="beeffriedrice-quantity" min="1" value="1">
+            <button onclick="addToCart('beeffriedrice', 250)">Add to Cart</button>
+          </div>
+      </div>
+    </section>
+    <button id="proceed" onclick="proceedToOrder()">Proceed to Order</button>
+  </main>
+
+  <script>
+    let cart = [];
+
+    function addToCart(name, price) {
+      const quantity = parseInt(document.getElementById(`${name.toLowerCase()}-quantity`).value);
+
+      if (quantity <= 0) {
+        alert('Quantity must be at least 1.');
+        return;
+      }
+
+      // Check if item already exists in the cart
+      const existingItem = cart.find(item => item.name === name);
+      if (existingItem) {
+        existingItem.quantity += quantity;
+        existingItem.totalPrice += quantity * price;
+      } else {
+        cart.push({ name, price, quantity, totalPrice: quantity * price });
+      }
+
+      alert(`${name} added to cart!`);
+    }
+
+    function proceedToOrder() {
+      localStorage.setItem('cart', JSON.stringify(cart));
+      window.location.href = 'order.html';
+    }
+  </script>
+    <script src="foodData.js"></script>
+    <script src="search.js"></script>
+</body>
+</html>

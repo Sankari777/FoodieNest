@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Your Order</h1>
+  </header>
+
+  <main>
+    <section id="order-summary">
+      <h2>Order Summary</h2>
+      <div id="cart-items"></div>
+      <p id="total-price">Total: ₹0</p>
+      <button id="place-order" onclick="placeOrder()">Place Order</button>
+    </section>
+  </main>
+
+  <script>
+    function loadCart() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      const cartItemsDiv = document.getElementById('cart-items');
+      let total = 0;
+
+      if (cart.length === 0) {
+        cartItemsDiv.innerHTML = '<p>Your cart is empty.</p>';
+        document.getElementById('total-price').textContent = 'Total: ₹0';
+        return;
+      }
+
+      cart.forEach(item => {
+        const itemDiv = document.createElement('div');
+        itemDiv.classList.add('cart-item');
+        itemDiv.innerHTML = `
+          <p>${item.name}</p>
+          <p>Qty: ${item.quantity}</p>
+          <p>₹${item.totalPrice}</p>
+        `;
+        cartItemsDiv.appendChild(itemDiv);
+        total += item.totalPrice;
+      });
+
+      document.getElementById('total-price').textContent = `Total: ₹${total}`;
+    }
+
+    function placeOrder() {
+      const cart = JSON.parse(localStorage.getItem('cart')) || [];
+      if (cart.length === 0) {
+        alert('Your cart is empty!');
+        return;
+      }
+
+      alert('Your order has been placed!');
+      localStorage.removeItem('cart');
+      window.location.href = 'order-status.html';
+    }
+
+    // Load cart on page load
+    window.onload = loadCart;
+  </script>
+</body>
+</html>

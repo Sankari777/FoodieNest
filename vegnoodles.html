@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ordering food</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Nonveg</h1>
+  </header>
+
+  <main>
+    <section id="menu">
+      <div class="menu-container">
+        <div class="food-item">
+          <img src="vegienoodles.jpg" alt="vegnoodles">
+          <h3>Veg Noodles</h3>
+          <p><strong>₹200</strong></p>
+          <label for="vegnoodles-quantity">Qty:</label>
+          <input type="number" id="vegnoodles-quantity" min="1" value="1">
+          <button onclick="addToCart('vegnoodles', 200)">Add to Cart</button>
+        </div>
+        <div class="food-item">
+          <img src="mudhroomnoodles.jpg" alt="mudhroomnoodles">
+          <h3>Mushroom Noodles</h3>
+          <p><strong>₹150</strong></p>
+          <label for="mudhroomnoodles-quantity">Qty:</label>
+          <input type="number" id="mudhroomnoodles-quantity" min="1" value="1">
+          <button onclick="addToCart('mudhroomnoodles', 150)">Add to Cart</button>
+        </div>
+        <div class="food-item">
+          <img src="gobinoodles.jpg" alt="gobinoodles">
+          <h3>Gobi Noodles</h3>
+          <p><strong>₹250</strong></p>
+          <label for="gobinoodles-quantity">Qty:</label>
+          <input type="number" id="gobinoodles-quantity" min="1" value="1">
+          <button onclick="addToCart('gobinoodles', 250)">Add to Cart</button>
+        </div>
+        <div class="food-item">
+          <img src="paneernoodles.jpg" alt="paneernoodles">
+          <h3>Paneer Noodles</h3>
+          <p><strong>₹350</strong></p>
+          <label for="paneernoodles-quantity">Qty:</label>
+          <input type="number" id="paneernoodles-quantity" min="1" value="1">
+          <button onclick="addToCart('paneernoodles', 350)">Add to Cart</button>
+        </div>
+        <div class="food-item">
+            <img src="maggi.jpg" alt="maggi">
+            <h3>Maggi</h3>
+            <p><strong>₹250</strong></p>
+            <label for="maggi-quantity">Qty:</label>
+            <input type="number" id="maggi-quantity" min="1" value="1">
+            <button onclick="addToCart('maggi', 250)">Add to Cart</button>
+          </div>
+      </div>
+    </section>
+    <button id="proceed" onclick="proceedToOrder()">Proceed to Order</button>
+  </main>
+
+  <script>
+    let cart = [];
+
+    function addToCart(name, price) {
+      const quantity = parseInt(document.getElementById(`${name.toLowerCase()}-quantity`).value);
+
+      if (quantity <= 0) {
+        alert('Quantity must be at least 1.');
+        return;
+      }
+
+      // Check if item already exists in the cart
+      const existingItem = cart.find(item => item.name === name);
+      if (existingItem) {
+        existingItem.quantity += quantity;
+        existingItem.totalPrice += quantity * price;
+      } else {
+        cart.push({ name, price, quantity, totalPrice: quantity * price });
+      }
+
+      alert(`${name} added to cart!`);
+    }
+
+    function proceedToOrder() {
+      localStorage.setItem('cart', JSON.stringify(cart));
+      window.location.href = 'order.html';
+    }
+  </script>
+    <script src="foodData.js"></script>
+    <script src="search.js"></script>
+</body>
+</html>

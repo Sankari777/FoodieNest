@@ -1,0 +1,93 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ordering food</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Veg</h1>
+  </header>
+
+  <main>
+    <section id="menu">
+      <div class="menu-container">
+        <div class="food-item">
+          <img src="mushroomfriedrice.jpg" alt="mushroomfriedrice">
+          <h3>Mushroom Friedrice</h3>
+          <p><strong>₹200</strong></p>
+          <label for="mushroomfriedrice-quantity">Qty:</label>
+          <input type="number" id="mushroomfriedrice-quantity" min="1" value="1">
+          <button onclick="addToCart('mushroomfriedrice', 200)">Add to Cart</button>
+        </div>
+        <div class="food-item">
+          <img src="vegschezwanfriedrice.jpg" alt="vegschezwanfriedrice">
+          <h3>veg schezwan Friedrice</h3>
+          <p><strong>₹150</strong></p>
+          <label for="vegschezwanfriedrice-quantity">Qty:</label>
+          <input type="number" id="vegschezwanfriedrice-quantity" min="1" value="1">
+          <button onclick="addToCart('vegschezwanfriedrice', 150)">Add to Cart</button>
+        </div>
+        <div class="food-item">
+          <img src="Vegmanchurianfriedrice.jpg" alt="Vegmanchurianfriedrice">
+          <h3>Veg manchurian Friedrice</h3>
+          <p><strong>₹250</strong></p>
+          <label for="Vegmanchurianfriedrice-quantity">Qty:</label>
+          <input type="number" id="Vegmanchurianfriedrice-quantity" min="1" value="1">
+          <button onclick="addToCart('eggfrVegmanchurianfriedriceedrice', 250)">Add to Cart</button>
+        </div>
+        <div class="food-item">
+          <img src="vegfriedrice.jpg" alt="vegfriedrice">
+          <h3>Veg Friedrice</h3>
+          <p><strong>₹350</strong></p>
+          <label for="vegfriedrice-quantity">Qty:</label>
+          <input type="number" id="vegfriedrice-quantity" min="1" value="1">
+          <button onclick="addToCart('vegfriedrice', 350)">Add to Cart</button>
+        </div>
+        <div class="food-item">
+            <img src="paneerfriedrice.jpg" alt="paneerfriedrice">
+            <h3>Paneer Friedrice</h3>
+            <p><strong>₹350</strong></p>
+            <label for="paneerfriedrice-quantity">Qty:</label>
+            <input type="number" id="paneerfriedrice-quantity" min="1" value="1">
+            <button onclick="addToCart('paneerfriedrice', 350)">Add to Cart</button>
+          </div>
+      </div>
+    </section>
+    <button id="proceed" onclick="proceedToOrder()">Proceed to Order</button>
+  </main>
+
+  <script>
+    let cart = [];
+
+    function addToCart(name, price) {
+      const quantity = parseInt(document.getElementById(`${name.toLowerCase()}-quantity`).value);
+
+      if (quantity <= 0) {
+        alert('Quantity must be at least 1.');
+        return;
+      }
+
+      // Check if item already exists in the cart
+      const existingItem = cart.find(item => item.name === name);
+      if (existingItem) {
+        existingItem.quantity += quantity;
+        existingItem.totalPrice += quantity * price;
+      } else {
+        cart.push({ name, price, quantity, totalPrice: quantity * price });
+      }
+
+      alert(`${name} added to cart!`);
+    }
+
+    function proceedToOrder() {
+      localStorage.setItem('cart', JSON.stringify(cart));
+      window.location.href = 'order.html';
+    }
+  </script>
+    <script src="foodData.js"></script>
+    <script src="search.js"></script>
+</body>
+</html>

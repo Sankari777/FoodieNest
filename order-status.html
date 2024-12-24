@@ -1,0 +1,61 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Order Status</title>
+  <link rel="stylesheet" href="order-status.css"> <!-- Link to the CSS file if using an external one -->
+</head>
+<body>
+  <div class="status-container">
+    <h1>Your Food is Being Prepared!</h1>
+    <p>Please wait a few moments while we prepare your delicious food.</p>
+    <div class="gif-container">
+      <img src="foodanime.gif" alt="Cooking Animation" class="cooking-gif">
+    </div>
+  </div>
+  <style>
+    body {
+  font-family: Arial, sans-serif;
+  margin: 0;
+  padding: 0;
+  display: flex;
+  align-items: center;
+  justify-content: center;
+  min-height: 100vh;
+  background-color: #f8f8f8;
+  color: #333;
+}
+
+.status-container {
+  text-align: center;
+}
+
+h1 {
+  font-size: 2em;
+  color: #d35400;
+  margin-bottom: 10px;
+}
+
+p {
+  font-size: 1.2em;
+  margin-bottom: 20px;
+}
+
+.gif-container {
+  max-width: 600px;
+  width: 100%;
+  margin: 0 auto;
+  border-radius: 10px;
+  overflow: hidden;
+  box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+}
+
+.cooking-gif {
+  width: 100%;
+  height: auto;
+  display: block;
+}
+  </style>
+</body>
+</html>

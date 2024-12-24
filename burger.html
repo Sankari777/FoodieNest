@@ -1,0 +1,101 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>ordering food</title>
+  <link rel="stylesheet" href="style.css">
+</head>
+<body>
+  <header>
+    <h1>Burger</h1>
+  </header>
+
+  <main>
+    <section id="menu">
+      <div class="menu-container">
+        <div class="food-item">
+          <img src="chicken burger.jpg" alt="chickenburger">
+          <h3>Chicken Burger</h3>
+          <p><strong>₹450</strong></p>
+          <label for="chickenburger-quantity">Qty:</label>
+          <input type="number" id="chickenburger-quantity" min="1" value="1">
+          <button onclick="addToCart('chickenburger', 450)">Add to Cart</button>
+        </div>
+        <div class="food-item">
+          <img src="Bisonburger.jpg" alt="bisonburger">
+          <h3>Bison Burger</h3>
+          <p><strong>₹150</strong></p>
+          <label for="bisonburger-quantity">Qty:</label>
+          <input type="number" id="bisonburger-quantity" min="1" value="1">
+          <button onclick="addToCart('bisonburger', 150)">Add to Cart</button>
+        </div>
+        <div class="food-item">
+          <img src="Chiliburger.jpg" alt="chiliburger">
+          <h3>Chili Burger</h3>
+          <p><strong>₹250</strong></p>
+          <label for="chiliburger-quantity">Qty:</label>
+          <input type="number" id="chiliburger-quantity" min="1" value="1">
+          <button onclick="addToCart('chiliburger', 250)">Add to Cart</button>
+        </div>
+        <div class="food-item">
+          <img src="Cheeseburger.jpg" alt="cheeseburger">
+          <h3>Cheese Burger</h3>
+          <p><strong>₹350</strong></p>
+          <label for="cheeseburger-quantity">Qty:</label>
+          <input type="number" id="cheeseburger-quantity" min="1" value="1">
+          <button onclick="addToCart('cheeseburger', 350)">Add to Cart</button>
+        </div>
+        <div class="food-item">
+            <img src="JuicyLucy.jpg" alt="juicylucyburger">
+            <h3>JuicyLucy Burger</h3>
+            <p><strong>₹350</strong></p>
+            <label for="juicylucyburger-quantity">Qty:</label>
+            <input type="number" id="juicylucyburger-quantity" min="1" value="1">
+            <button onclick="addToCart('juicylucyburger', 350)">Add to Cart</button>
+          </div>
+          <div class="food-item">
+            <img src="Veggieburger.jpg" alt="veggieburger">
+            <h3>Veggie Burger</h3>
+            <p><strong>₹350</strong></p>
+            <label for="veggieburger-quantity">Qty:</label>
+            <input type="number" id="veggieburger-quantity" min="1" value="1">
+            <button onclick="addToCart('veggieburger', 350)">Add to Cart</button>
+          </div>
+      </div>
+    </section>
+    <button id="proceed" onclick="proceedToOrder()">Proceed to Order</button>
+  </main>
+
+  <script>
+    let cart = [];
+
+    function addToCart(name, price) {
+      const quantity = parseInt(document.getElementById(`${name.toLowerCase()}-quantity`).value);
+
+      if (quantity <= 0) {
+        alert('Quantity must be at least 1.');
+        return;
+      }
+
+      // Check if item already exists in the cart
+      const existingItem = cart.find(item => item.name === name);
+      if (existingItem) {
+        existingItem.quantity += quantity;
+        existingItem.totalPrice += quantity * price;
+      } else {
+        cart.push({ name, price, quantity, totalPrice: quantity * price });
+      }
+
+      alert(`${name} added to cart!`);
+    }
+
+    function proceedToOrder() {
+      localStorage.setItem('cart', JSON.stringify(cart));
+      window.location.href = 'order.html';
+    }
+  </script>
+    <script src="foodData.js"></script>
+    <script src="search.js"></script>
+</body>
+</html>
